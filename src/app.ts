@@ -11,6 +11,9 @@ import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import mysql from 'mysql';
+import myconn from 'express-myconnection';
+import { myConnection } from './db/myConnection';
 
 class App {
   public app: express.Application;
@@ -50,6 +53,7 @@ class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+    this.app.use(myConnection());
   }
 
   private initializeRoutes(routes: Routes[]) {
