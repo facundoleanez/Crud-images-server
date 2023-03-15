@@ -1,7 +1,6 @@
 import ImgController from '@/controllers/img.controller';
 import { Routes } from '@/interfaces/routes.interface';
 import imgMiddleware from '@/middlewares/img.middleware';
-import fileUpload from '@/middlewares/img.middleware';
 import { Router } from 'express';
 
 class ImageRoute implements Routes {
@@ -15,6 +14,7 @@ class ImageRoute implements Routes {
 
   private initializeRoutes() {
     this.router.post(`${this.path}`, imgMiddleware(), this.imgController.saveImg);
+    this.router.get(`${this.path}`, this.imgController.getAllImgs);
   }
 }
 
